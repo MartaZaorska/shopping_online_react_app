@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import ShopContext from '../context/shopContext';
+import Navbar from '../components/Navbar';
+import SelectCategories from '../components/SelectCategories';
 
 function Products(props) {
   const [products, setProducts] = useState([]);
@@ -20,19 +22,39 @@ function Products(props) {
     }
   }, [props.match.params.category, context.products]);
 
+  const changeCategory = category => {
+    props.history.push(`/products/${category}`);
+  };
+
   if (products.length === 0) return <section>Loading...</section>;
 
   return (
-    <section>
-      {products.map(product => (
-        <section key={product.id}>
-          <img src={`${product.image_link}`} alt={`${product.name}`} />
-          <h4>
-            <Link to={`/product/${product.id}`}>{product.name}</Link>
-          </h4>
+    <React.Fragment>
+      <Navbar cart={context.cart} />
+      <section className='products'>
+        <SelectCategories
+          changeCategory={changeCategory}
+          activeCategory={props.match.params.category}
+          categories={context.categories}
+        />
+        <section className='products__content'>
+          {products.map(product => (
+            <Link
+              to={`/product/${product.id}`}
+              key={product.id}
+              className='products_item'
+            >
+              <img
+                src={`${product.image_link}`}
+                alt={`${product.name}`}
+                className='products_item__image'
+              />
+              <h4 className='products_item__title'>{product.name}</h4>
+            </Link>
+          ))}
         </section>
-      ))}
-    </section>
+      </section>
+    </React.Fragment>
   );
 }
 
