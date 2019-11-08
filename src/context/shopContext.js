@@ -56,7 +56,7 @@ export function Provider(props) {
   const getProducts = () => {
     return new Promise((resolve, reject) => {
       fetch(
-        'http://makeup-api.herokuapp.com/api/v1/products.json?brand=smashbox'
+        'https://cors-anywhere.herokuapp.com/http://makeup-api.herokuapp.com/api/v1/products.json?brand=smashbox'
       )
         .then(res => res.json())
         .then(data => resolve(data))

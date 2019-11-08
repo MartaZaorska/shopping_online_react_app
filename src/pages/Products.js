@@ -26,8 +26,6 @@ function Products(props) {
     props.history.push(`/products/${category}`);
   };
 
-  if (products.length === 0) return <section>Loading...</section>;
-
   return (
     <React.Fragment>
       <Navbar cart={context.cart} />
@@ -37,22 +35,26 @@ function Products(props) {
           activeCategory={props.match.params.category}
           categories={context.categories}
         />
-        <section className='products__content'>
-          {products.map(product => (
-            <Link
-              to={`/product/${product.id}`}
-              key={product.id}
-              className='products_item'
-            >
-              <img
-                src={`${product.image_link}`}
-                alt={`${product.name}`}
-                className='products_item__image'
-              />
-              <h4 className='products_item__title'>{product.name}</h4>
-            </Link>
-          ))}
-        </section>
+        {products.length === 0 ? (
+          <section>Loading...</section>
+        ) : (
+          <section className='products__content'>
+            {products.map(product => (
+              <Link
+                to={`/product/${product.id}`}
+                key={product.id}
+                className='products_item'
+              >
+                <img
+                  src={`${product.image_link}`}
+                  alt={`${product.name}`}
+                  className='products_item__image'
+                />
+                <h4 className='products_item__title'>{product.name}</h4>
+              </Link>
+            ))}
+          </section>
+        )}
       </section>
     </React.Fragment>
   );
