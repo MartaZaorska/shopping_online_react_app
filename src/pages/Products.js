@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ShopContext from '../context/shopContext';
 import Navbar from '../components/Navbar';
 import SelectCategories from '../components/SelectCategories';
+import Spinner from '../components/Spinner';
 
 function Products(props) {
   const [products, setProducts] = useState([]);
@@ -36,7 +37,7 @@ function Products(props) {
           categories={context.categories}
         />
         {products.length === 0 ? (
-          <section>Loading...</section>
+          <Spinner />
         ) : (
           <section className='products__content'>
             {products.map(product => (
@@ -51,6 +52,7 @@ function Products(props) {
                   className='products_item__image'
                 />
                 <h4 className='products_item__title'>{product.name}</h4>
+                <span className='products_item__price'>${product.price}</span>
               </Link>
             ))}
           </section>
