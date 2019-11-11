@@ -56,7 +56,7 @@ export function Provider(props) {
   const getProducts = () => {
     return new Promise((resolve, reject) => {
       fetch(
-        'https://cors-anywhere.herokuapp.com/http://makeup-api.herokuapp.com/api/v1/products.json?brand=smashbox'
+        'https://makeup-api.herokuapp.com/api/v1/products.json?brand=smashbox'
       )
         .then(res => res.json())
         .then(data => resolve(data))
@@ -64,8 +64,8 @@ export function Provider(props) {
     });
   };
 
-  const addProduct = (product, quantity) =>
-    dispatch({ type: ADD_PRODUCT, product, quantity });
+  const addProduct = (product, color = false) =>
+    dispatch({ type: ADD_PRODUCT, product, color });
 
   const removeProduct = productId =>
     dispatch({ type: REMOVE_PRODUCT, productId });

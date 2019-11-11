@@ -16,19 +16,6 @@ $xl: 'screen and (min-width: 992px)';
   box-sizing: border-box;
 }
 
-button,
-button:active,
-button:focus,
-input,
-input:active,
-input:focus,
-select,
-select:active,
-select:focus {
-  font-family: inherit;
-  outline: none;
-}
-
 a {
   text-decoration: none;
   color: inherit;
@@ -44,6 +31,19 @@ body {
   overflow-x: hidden;
 }
 
+button,
+button:active,
+button:focus,
+input,
+input:active,
+input:focus,
+select,
+select:active,
+select:focus {
+  font-family: inherit;
+  outline: none;
+}
+
 // NAV SECTION
 
 .nav {
@@ -54,15 +54,23 @@ body {
   max-height: 50px;
   padding: 1em;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.cart__link {
+.nav__link {
   position: relative;
   color: rgba(0, 0, 0, 0.7);
 
   i {
     font-size: 1.7em;
+  }
+
+  &--brand {
+    color: $colorDark;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 0.1em 0.5em;
   }
 
   &--qty {
@@ -77,6 +85,12 @@ body {
     font-size: 0.8em;
     line-height: 17px;
     text-align: center;
+  }
+
+  @media #{$xl} {
+    &--brand {
+      font-size: 1.3em;
+    }
   }
 }
 
@@ -349,9 +363,394 @@ body {
   }
 }
 
+// SINGLE PRODUCT SECTION
+
+.product {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  background: $colorGray;
+  padding-top: 1.1em;
+  z-index: 2;
+
+  &__content {
+    width: 100%;
+    padding: 0.2em 1.5em 1em 1.5em;
+  }
+
+  &__link--back {
+    background: transparent;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0.4em 0em;
+    margin-bottom: 0.3em;
+    i {
+      color: lighten($colorDark, 10);
+      margin-right: 0.3em;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+  }
+
+  &__title {
+    font-size: 2em;
+    font-weight: 300;
+    padding-bottom: 0.3em;
+  }
+
+  &__brand {
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+  }
+
+  @media #{$md} {
+    &__image {
+      width: 65%;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  @media #{$lg} {
+    height: 100vh;
+    padding-top: 50px;
+    &__image {
+      width: 50%;
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+    }
+
+    &__content {
+      width: 50%;
+      height: calc(100vh - 50px);
+      position: relative;
+    }
+
+    &__title {
+      font-size: 2.5em;
+    }
+  }
+
+  @media #{$xl} {
+    &__image {
+      width: 30%;
+    }
+    &__content {
+      width: 70%;
+    }
+
+    &__title {
+      font-size: 3.5em;
+    }
+  }
+}
+
+.product_colors {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0.3em 0em;
+  &__item {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: block;
+    margin: 0.5em 1em 0.5em 0em;
+    transition: all 0.15s;
+    &--active,
+    &:hover {
+      box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+      border: 3px solid #fff;
+      width: 23px;
+      height: 23px;
+    }
+  }
+}
+
+.product_controls {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5em;
+
+  &__price {
+    width: 40%;
+    font-size: 1.5em;
+  }
+
+  &__button {
+    width: 30%;
+    cursor: pointer;
+    background: lighten($colorDark, 15);
+    color: darken($colorGray, 10);
+    border-radius: 1em;
+    padding: 0.5em;
+    transition: all 0.1s;
+    &:hover {
+      background: $colorDark;
+      color: $colorGray;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1),
+        0px 0px 25px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  @media #{$md} {
+    &__button {
+      width: 20%;
+    }
+  }
+
+  @media #{$lg} {
+    flex-wrap: wrap;
+    &__price {
+      width: 100%;
+      font-size: 2em;
+      font-weight: 200;
+    }
+
+    &__button {
+      margin-top: 1.5em;
+      width: 40%;
+    }
+  }
+
+  @media #{$xl} {
+    &__button {
+      width: 20%;
+    }
+  }
+}
+
+/// CART SECTION
+
+.empty_cart {
+  padding: 2.5em 1.5em;
+  &__title {
+    margin: 0.5em 0em;
+    font-weight: 200;
+  }
+
+  &__link {
+    i {
+      margin-right: 0.5em;
+    }
+  }
+
+  @media #{$lg} {
+    &__title {
+      font-size: 2.5em;
+    }
+  }
+}
+
+.cart {
+  width: 100%;
+  height: auto;
+  padding: 1em;
+  overflow-x: hidden;
+  padding-bottom: 150px;
+
+  &__link--back i {
+    margin-right: 0.5em;
+  }
+
+  &__title {
+    font-weight: 200;
+    padding: 0.4em 0em;
+  }
+
+  &__content {
+    width: 100%;
+    margin: 0.8em 0em;
+  }
+
+  @media #{$xl} {
+    padding-bottom: 1em;
+    &__content {
+      width: calc(100% - 350px);
+    }
+  }
+}
+
+.cart_item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.1em;
+
+  img {
+    width: 80px;
+    height: auto;
+    border-radius: 1em;
+  }
+
+  &__text {
+    font-size: 0.9em;
+  }
+
+  &__name {
+    width: calc(80% - 80px);
+    line-height: 1.5;
+  }
+
+  &__price--mobile {
+    text-align: right;
+  }
+
+  &__price--desktop {
+    display: none;
+  }
+
+  @media #{$xl} {
+    &__name {
+      width: calc(40% - 80px);
+    }
+
+    &__price--mobile {
+      display: none;
+    }
+
+    &__price--desktop {
+      display: flex;
+      width: 50%;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
+
+.cart_quantity {
+  padding: 0.15em;
+  border: 1px solid darken($colorGray, 15);
+  border-radius: 0.85em;
+
+  &__value {
+    padding: 0.3em 0.5em;
+  }
+
+  &__button {
+    padding: 0.3em;
+    cursor: pointer;
+    background: transparent;
+  }
+}
+
+.cart_total {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 3;
+  width: 100%;
+  padding: 1.5em 2em 1em 2em;
+  background: $colorGray;
+  color: $colorDark;
+  border-top-left-radius: 2.5em;
+  border-top-right-radius: 2.5em;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1), 0px 0px 10px rgba(0, 0, 0, 0.1),
+    0px 0px 20px rgba(0, 0, 0, 0.1);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin: 0.5em 0em 0.8em 0em;
+  }
+
+  &__button {
+    background: transparent;
+    color: lighten($colorDark, 10);
+    cursor: pointer;
+    &:hover {
+      color: $colorDark;
+    }
+  }
+
+  &__text {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-right: 1em;
+  }
+
+  &__title {
+    font-size: 1.7em;
+  }
+
+  &__button--checkout {
+    display: block;
+    width: 100%;
+    padding: 0.4em 0.5em;
+    background: $colorDark;
+    color: $colorGray;
+    font-size: 0.9em;
+    border-radius: 1em;
+    cursor: pointer;
+    i {
+      margin-left: 0.5em;
+    }
+  }
+
+  @media #{$md} {
+    &__button--checkout {
+      width: auto;
+      padding: 0.3em 2em;
+    }
+  }
+
+  @media #{$xl} {
+    width: 300px;
+    height: 100vh;
+    top: 0px;
+    left: calc(100% - 300px);
+    border-top-right-radius: 0px;
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+    padding-top: 5em;
+
+    &__header {
+      flex-wrap: wrap;
+      margin-top: 1.5em;
+    }
+
+    &__text {
+      font-size: 0.85em;
+      width: 100%;
+      padding-bottom: 0.5em;
+    }
+
+    &__button--checkout {
+      width: 100%;
+      margin-top: 2em;
+    }
+  }
+}
+
+.cart_copyright,
+.empty_cart_copyright {
+  text-align: right;
+  position: fixed;
+  bottom: 1.5em;
+  right: 1.5em;
+  font-size: 0.9em;
+  display: none;
+  @media #{$md} {
+    display: block;
+  }
+}
+
+.empty_cart_copyright {
+  bottom: 0.5em;
+  right: 0.5em;
+}
+
 .title__background {
   position: fixed;
-  bottom: 0.2em;
+  bottom: 0.4em;
   right: 0.2em;
   font-weight: 900;
   pointer-events: none;
@@ -360,16 +759,28 @@ body {
   text-transform: lowercase;
   font-size: 4em;
 
+  &--left {
+    left: 0.2em;
+    display: none;
+  }
+
   @media #{$sm} {
     font-size: 5.5em;
   }
 
   @media #{$lg} {
     font-size: 9em;
+    &--left {
+      display: block;
+      font-size: 5em;
+    }
   }
 
   @media #{$xl} {
     font-size: 12em;
+    &--left {
+      font-size: 10em;
+    }
   }
 }
 
@@ -382,7 +793,7 @@ body {
   border-radius: 50%;
   background: rgba($colorDark, 0.8);
   color: $colorGray;
-  bottom: 1.2em;
+  bottom: 4em;
   right: 1.2em;
   text-align: center;
   font-size: 1.1em;

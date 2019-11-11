@@ -14,10 +14,13 @@ function Navbar({ cart }) {
 
   return (
     <nav className='nav'>
-      <Link to='/cart' className='cart__link'>
+      <Link to='/' className='nav__link--brand'>
+        smashbox
+      </Link>
+      <Link to='/cart' className='nav__link'>
         <i className='fas fa-shopping-bag'></i>
         {quantity !== 0 ? (
-          <span className='cart__link--qty'>{quantity}</span>
+          <span className='nav__link--qty'>{quantity}</span>
         ) : null}
       </Link>
     </nav>

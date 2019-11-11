@@ -13,7 +13,7 @@ function Home() {
       <header className='home__header'>
         <h1 className='home__title'>smashbox</h1>
         <p className='home__text'>shop online</p>
-        <Link to='/categories' className='home__link'>
+        <Link to='/products/all' className='home__link'>
           <i className='fas fa-angle-down'></i>
         </Link>
       </header>

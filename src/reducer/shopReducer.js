@@ -2,13 +2,17 @@ export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const CLEAR_CART = 'CLEAR_CART';
 
-const addProduct = (product, quantity, state) => {
+const addProduct = (product, color, state) => {
   const cart = [...state.cart];
-  const productIndex = cart.findIndex(item => item.id === product.id);
+  const productIndex = cart.findIndex(item => {
+    return color
+      ? item.id === product.id && color === item.color
+      : product.id === item.id;
+  });
 
   productIndex < 0
-    ? cart.push({ ...product, quantity })
-    : (cart[productIndex].quantity += quantity);
+    ? cart.push({ ...product, quantity: 1, color })
+    : (cart[productIndex].quantity += 1);
 
   localStorage.setItem('shopping_cart', JSON.stringify(cart));
 
@@ -31,7 +35,7 @@ const removeProduct = (productId, state) => {
 export const shopReducer = (state, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      return addProduct(action.product, action.quantity, state);
+      return addProduct(action.product, action.color, state);
     case REMOVE_PRODUCT:
       return removeProduct(action.productId, state);
     case CLEAR_CART:
