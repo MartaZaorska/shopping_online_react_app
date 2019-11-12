@@ -10,23 +10,6 @@ import {
 const ShopContext = React.createContext({});
 export default ShopContext;
 
-const prepareData = data => {
-  const products = [];
-  data.forEach(item => {
-    products.push({
-      id: item.id,
-      brand: item.brand,
-      name: item.name,
-      price: item.price,
-      image_link: item.image_link,
-      product_link: item.product_link,
-      product_type: item.product_type,
-      product_colors: [...item.product_colors]
-    });
-  });
-  return products;
-};
-
 export function Provider(props) {
   const categories = [
     'blush',
@@ -38,12 +21,31 @@ export function Provider(props) {
     'lipstick',
     'mascara'
   ];
+
   const [products, setProducts] = useState([]);
 
   const [state, dispatch] = useReducer(shopReducer, { cart: [] }, () => {
     const storeCart = localStorage.getItem('shopping_cart');
     return storeCart === null ? { cart: [] } : { cart: JSON.parse(storeCart) };
   });
+
+  const prepareData = data => {
+    const products = [];
+    data.forEach(item => {
+      products.push({
+        id: item.id,
+        brand: item.brand,
+        name: item.name,
+        price: item.price,
+        image_link: item.image_link,
+        product_link: item.product_link,
+        product_type: item.product_type,
+        product_colors: [...item.product_colors],
+        description: item.description.split('  ')[0]
+      });
+    });
+    return products;
+  };
 
   useEffect(() => {
     getProducts()
@@ -67,17 +69,17 @@ export function Provider(props) {
   const addProduct = (product, color = false) =>
     dispatch({ type: ADD_PRODUCT, product, color });
 
-  const removeProduct = productId =>
-    dispatch({ type: REMOVE_PRODUCT, productId });
+  const removeProduct = (productId, color) =>
+    dispatch({ type: REMOVE_PRODUCT, productId, color });
 
   const clearCart = () => dispatch({ type: CLEAR_CART });
 
   return (
     <ShopContext.Provider
       value={{
+        cart: state.cart,
         products,
         categories,
-        cart: state.cart,
         addProduct,
         removeProduct,
         clearCart

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Copyright from '../components/Copyright';
+
 function EmptyCart() {
   return (
     <React.Fragment>
@@ -11,19 +13,7 @@ function EmptyCart() {
         </Link>
       </section>
       <span className='title__background'>SMASHBOX</span>
-      <p className='empty_cart_copyright'>
-        Created by{' '}
-        <a
-          rel='noopener noreferrer'
-          className='cart_copyright__link'
-          href='https://martazaorska.github.io/portfolio/'
-          target='_blank'
-        >
-          Marta Zaorska
-        </a>
-        <br />
-        &copy; Shopping App {new Date().getFullYear()}
-      </p>
+      <Copyright />
     </React.Fragment>
   );
 }

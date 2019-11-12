@@ -11,4 +11,4 @@ function ProductControls({ price, addToCart }) {
   );
 }
 
-export default ProductControls;
+export default React.memo(ProductControls);

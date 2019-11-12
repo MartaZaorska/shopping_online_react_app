@@ -19,9 +19,13 @@ const addProduct = (product, color, state) => {
   return { ...state, cart };
 };
 
-const removeProduct = (productId, state) => {
+const removeProduct = (productId, color, state) => {
   const cart = [...state.cart];
-  const productIndex = cart.findIndex(item => item.id === productId);
+  const productIndex = cart.findIndex(item => {
+    return color === false
+      ? item.id === productId
+      : item.id === productId && item.color === color;
+  });
 
   cart[productIndex].quantity === 1
     ? cart.splice(productIndex, 1)
@@ -37,7 +41,7 @@ export const shopReducer = (state, action) => {
     case ADD_PRODUCT:
       return addProduct(action.product, action.color, state);
     case REMOVE_PRODUCT:
-      return removeProduct(action.productId, state);
+      return removeProduct(action.productId, action.color, state);
     case CLEAR_CART:
       localStorage.setItem('shopping_cart', JSON.stringify([]));
       return {

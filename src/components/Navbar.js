@@ -27,4 +27,4 @@ function Navbar({ cart }) {
   );
 }
 
-export default Navbar;
+export default React.memo(Navbar);

@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
 function Home() {
-  const imageSRC =
-    document.body.getBoundingClientRect().width >= 768
-      ? './images/home1.png'
-      : './images/home.png';
+  const [imageURL, setImageURL] = useState('./images/home1.png');
+
+  useEffect(() => {
+    getImageURL();
+    window.addEventListener('resize', getImageURL);
+  }, []);
+
+  const getImageURL = () => {
+    const image =
+      document.body.getBoundingClientRect().width >= 768
+        ? './images/home1.png'
+        : './images/home.png';
+    setImageURL(image);
+  };
 
   return (
     <section className='home'>
@@ -17,7 +27,7 @@ function Home() {
           <i className='fas fa-angle-down'></i>
         </Link>
       </header>
-      <img className='home__image' src={imageSRC} alt='home' />
+      <img className='home__image' src={imageURL} alt='home' />
     </section>
   );
 }

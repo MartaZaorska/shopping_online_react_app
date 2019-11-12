@@ -24,7 +24,7 @@ function CartItem({ item, addProduct, removeProduct }) {
         <section className='cart_quantity'>
           <button
             className='cart_quantity__button'
-            onClick={() => removeProduct(item.id)}
+            onClick={() => removeProduct(item.id, item.color)}
           >
             -
           </button>
@@ -44,4 +44,4 @@ function CartItem({ item, addProduct, removeProduct }) {
   );
 }
 
-export default CartItem;
+export default React.memo(CartItem);

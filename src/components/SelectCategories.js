@@ -17,4 +17,4 @@ function SelectCategories({ categories, activeCategory, changeCategory }) {
   );
 }
 
-export default SelectCategories;
+export default React.memo(SelectCategories);

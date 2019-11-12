@@ -4,6 +4,7 @@ import ShopContext from '../context/shopContext';
 
 import EmptyCart from '../components/EmptyCart';
 import CartItem from '../components/CartItem';
+import Copyright from '../components/Copyright';
 
 function Cart() {
   const context = useContext(ShopContext);
@@ -48,19 +49,7 @@ function Cart() {
         <button className='cart_total__button--checkout'>
           Continue to checkout <i className='fas fa-arrow-right'></i>
         </button>
-        <p className='cart_copyright'>
-          Created by{' '}
-          <a
-            rel='noopener noreferrer'
-            className='cart_copyright__link'
-            href='https://martazaorska.github.io/portfolio/'
-            target='_blank'
-          >
-            Marta Zaorska
-          </a>
-          <br />
-          &copy; Shopping App {new Date().getFullYear()}
-        </p>
+        <Copyright />
       </section>
     </section>
   );

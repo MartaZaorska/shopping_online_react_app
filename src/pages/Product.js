@@ -24,11 +24,15 @@ function ProductItem(props) {
   }, [props.match.params.id, context.products]);
 
   const addToCart = () => {
+    const statement = document.querySelector('.statement');
     if (color && color.colour_name) {
       context.addProduct(product, color.colour_name);
     } else {
       context.addProduct(product);
     }
+
+    statement.classList.add('statement--active');
+    setTimeout(() => statement.classList.remove('statement--active'), 2000);
   };
 
   const handleClick = e => {
@@ -36,10 +40,16 @@ function ProductItem(props) {
     props.history.goBack();
   };
 
+  const getDescription = desc => {
+    const index = desc.slice(0, 500).lastIndexOf('.');
+    return desc.slice(0, index + 1);
+  };
+
   if (Object.keys(product).length === 0) return <Spinner />;
 
   return (
     <React.Fragment>
+      <p className='statement'>Product added to your basket.</p>
       <Navbar cart={context.cart} />
       <section className='product'>
         <img
@@ -48,15 +58,13 @@ function ProductItem(props) {
           alt={`${product.name}`}
         />
         <section className='product__content'>
-          <button
-            href='#'
-            onClick={handleClick}
-            className='product__link--back'
-          >
+          <button onClick={handleClick} className='product__link--back'>
             <i className='fas fa-arrow-left'></i> back
           </button>
-          <p className='product__brand'>{product.brand}</p>
           <h2 className='product__title'>{product.name}</h2>
+          <p className='product__description'>
+            {getDescription(product.description)}
+          </p>
           {product.product_colors.length === 0 ? null : (
             <ProductColors
               productColors={product.product_colors.slice(0, 52)}
