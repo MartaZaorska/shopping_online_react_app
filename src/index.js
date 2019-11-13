@@ -1,10 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.scss";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
-import { Provider } from './context/shopContext';
-import { BrowserRouter } from 'react-router-dom';
+import { Provider } from "./context/shopContext";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -12,5 +13,7 @@ ReactDOM.render(
       <App />
     </Provider>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
+
+serviceWorker.register();

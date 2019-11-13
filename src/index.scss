@@ -178,13 +178,13 @@ select:focus {
       width: 280px;
     }
 
-    &__title {
+    &__header {
       margin-top: 8%;
     }
   }
 
   @media screen and (max-height: 585px) and (max-width: 767px) {
-    &__title {
+    &__header {
       margin-top: 7%;
     }
 
